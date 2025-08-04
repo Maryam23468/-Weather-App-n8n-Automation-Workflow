@@ -1,48 +1,61 @@
-# -Weather-App-n8n-Automation-Workflow
-⛅ Weather App — n8n Workflow
-This is a simple and customizable Weather App built using n8n, an automation tool that fetches real-time weather data for a given city using the OpenWeatherMap API.
+# 🌦️ Weather App — n8n Workflow
 
-📌 Overview
-This workflow allows you to:
-Manually trigger weather data retrieval
-Specify a city (e.g., Rawalpindi)
-Get current:
-Temperature
-Weather conditions
-Feels-like temperature
-Humidity
-Wind speed
+A simple, automated weather update app built using [n8n](https://n8n.io/). This workflow fetches real-time weather data from the **OpenWeatherMap API** based on a user-defined city (default: Rawalpindi). It provides current temperature, humidity, wind speed, and more in a structured format.
 
-🧩 Workflow Structure
-Node	Function
-When clicking ‘Execute workflow’	Manually starts the workflow.
-Edit Fields	Sets the target city (e.g., Rawalpindi).
-OpenWeatherMap	Calls the OpenWeatherMap API to fetch weather data.
-Edit Fields1	Extracts and formats key weather metrics.
+---
 
-⚙️ Setup Instructions
-Prerequisites
-An instance of n8n (self-hosted or cloud)
-A valid OpenWeatherMap API key
+## 📋 Features
 
-Configuration Steps
-Import the workflow JSON into your n8n instance.
-Set up credentials:
-Type: OpenWeatherMap
-Name: OpenWeatherMap account
-Enter your API key
-Edit the City value in the Edit Fields node to your preferred city.
+- 🌍 Fetch weather for any city
+- 🌡️ Current temperature and feels-like temperature
+- ☁️ Weather condition and description
+- 💧 Humidity level
+- 💨 Wind speed
+- 🔁 Easily customizable
 
-🚀 How to Run
-Go to your n8n canvas.
-Open this workflow.
-Click “Execute Workflow”.
-You’ll receive a structured weather report.
+---
 
-📤 Example Output
-json
-Copy
-Edit
+## 🧠 Workflow Overview
+
+The workflow consists of four key nodes:
+
+| Node                      | Description                                                      |
+|---------------------------|------------------------------------------------------------------|
+| `Manual Trigger`          | Starts the workflow manually                                     |
+| `Edit Fields`             | Sets the target city (default: Rawalpindi)                      |
+| `OpenWeatherMap`          | Calls the OpenWeatherMap API to fetch live weather data         |
+| `Edit Fields1`            | Formats and structures the weather data into a clean output     |
+
+---
+
+## 🧰 Prerequisites
+
+- 🛠️ [n8n](https://n8n.io/) instance (cloud or self-hosted)
+- 🔑 OpenWeatherMap API key ([Get one here](https://openweathermap.org/api))
+
+---
+
+## ⚙️ Setup Instructions
+
+1. **Clone or Import** this workflow JSON into your n8n instance.
+2. **Create Credentials**:
+   - Go to **Credentials** tab in n8n
+   - Create a new credential for **OpenWeatherMap**
+   - Paste your API key and name it `OpenWeatherMap account`
+3. **Set Your City**:
+   - Open the `Edit Fields` node
+   - Change `"Rawalpindi"` to your desired city
+
+---
+
+## 🚀 How to Use
+
+1. Open your n8n instance
+2. Open this workflow
+3. Click on **“Execute Workflow”**
+4. You will receive an output like this:
+
+```json
 {
   "Location": "Rawalpindi",
   "Temperature": "33°C",
@@ -51,20 +64,3 @@ Edit
   "Humidity": "55%",
   "WindSpeed": "4.6 m/s"
 }
-🛠️ Customization
-You can:
-Replace Rawalpindi with any other city (e.g., Karachi, Lahore, New York)
-Add a cron trigger to fetch weather updates every morning
-Extend it to send data via Email, Telegram, or Slack
-
-🧪 Tips
-Use Celsius or Fahrenheit by setting units in the API node.
-Add conditional logic if you want alerts for extreme weather.
-
-🤝 Contributions
-Feel free to fork the project, submit issues, or open pull requests for enhancements!
-
-📝 License
-This project is licensed under the MIT License.
-
-Let me know if you want this saved as a downloadable .md file or need a version in Urdu.
