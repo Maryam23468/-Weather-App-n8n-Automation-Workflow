@@ -1,0 +1,159 @@
+{
+  "name": "Weather App",
+  "nodes": [
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        0,
+        0
+      ],
+      "id": "e3fc6821-c4fd-44d2-bf7c-0d78bbd30b6f",
+      "name": "When clicking ‘Execute workflow’"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "14397727-6fcf-4711-b011-81094654fe71",
+              "name": "City ",
+              "value": "Rawalpindi",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        220,
+        0
+      ],
+      "id": "b8216ca5-8ee9-4d91-8e7b-24bb2426554c",
+      "name": "Edit Fields"
+    },
+    {
+      "parameters": {
+        "cityName": "={{ $json['City '] }}",
+        "language": "en"
+      },
+      "type": "n8n-nodes-base.openWeatherMap",
+      "typeVersion": 1,
+      "position": [
+        440,
+        0
+      ],
+      "id": "f18213c0-f3d2-4673-bca5-58998b15e6c8",
+      "name": "OpenWeatherMap",
+      "credentials": {
+        "openWeatherMapApi": {
+          "id": "khniK39ik5dFMUJw",
+          "name": "OpenWeatherMap account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "27c556a0-dd15-4428-a202-8c3a366412aa",
+              "name": "Location",
+              "value": "={{ $json.name }}",
+              "type": "string"
+            },
+            {
+              "id": "b5bf58fd-62c1-4b0e-a8e9-17e4c111b726",
+              "name": "Temperature",
+              "value": "={{ $json.main.temp }}°C",
+              "type": "string"
+            },
+            {
+              "id": "6bf3b7aa-dc78-4e44-b33a-195494b8a4f5",
+              "name": "Feels like",
+              "value": "={{ $json.main.feels_like }}°C",
+              "type": "string"
+            },
+            {
+              "id": "c34aa99f-8367-4700-98ed-28efb7bcf6c1",
+              "name": "Weather",
+              "value": "=\n{{$node[\"OpenWeatherMap\"].json[\"weather\"][0][\"main\"]}} ({{$node[\"OpenWeatherMap\"].json[\"weather\"][0][\"description\"]}})",
+              "type": "string"
+            },
+            {
+              "id": "88dd6257-5504-4f71-9a3a-9372cbb6bfd9",
+              "name": "Humidity",
+              "value": "={{$node[\"OpenWeatherMap\"].json[\"main\"][\"humidity\"]}}%",
+              "type": "string"
+            },
+            {
+              "id": "5cc02134-bca8-4056-b836-b71df2b03ce9",
+              "name": "WindSpeed",
+              "value": "={{$node[\"OpenWeatherMap\"].json[\"wind\"][\"speed\"]}} m/s",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        660,
+        0
+      ],
+      "id": "4ab7a47b-73b5-48a8-8766-b63bb8f5ef10",
+      "name": "Edit Fields1"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "When clicking ‘Execute workflow’": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields": {
+      "main": [
+        [
+          {
+            "node": "OpenWeatherMap",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenWeatherMap": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "d5f4e70b-d546-42bf-bb70-8e8351a056d0",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "f6ef8f1002b6b50d74eee3ad2a43a14fe456e824f9e761d174b2ea7ea5c6b7ca"
+  },
+  "id": "b3HIHfog7ta6Q9VV",
+  "tags": []
+}
